@@ -6,11 +6,16 @@ public class PlayerMovement : MonoBehaviour
 {
     CharacterController characterController;
     [Header("Opciones de Personaje")]
-    public float walkSpeed = 6.0f;
-    public float runSpeed = 10.0f;
+    public float walkSpeed = 4.0f;
+    public float runSpeed = 12.0f;
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
-
+    //float timeRunning = 0.0f;
+    float Loop ;
+    bool isRunning = false;
+    bool isWalking = false;
+    float sprintDuration = 2.0f;
+    private float sprintTimer = 0;
 
     [Header("Opciones de Camara")]
     public Camera cam;
@@ -38,12 +43,64 @@ public class PlayerMovement : MonoBehaviour
         
         if(characterController.isGrounded)
         {
-            move = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 
-            if(Input.GetKey(KeyCode.LeftShift))
-                move = transform.TransformDirection(move) * runSpeed;
+            move = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+            if ( Input.GetAxis( "Horizontal" ) !=0f || Input.GetAxis( "Vertical" ) != 0f)
+                {
+                    if ( Input.GetKey( "left shift" ) || Input.GetKey( "right shift" ) )
+                    {
+                        // Running
+                        isWalking = false;
+                        isRunning = true;
+                    }
+                    else
+                    {
+                        // Walking
+                        isWalking = true;
+                        isRunning = false;
+                    }
+                }
             else
+            {
+                // Stopped
+                isWalking = false;
+                isRunning = false;
+            }
+            
+            // check the sprint timer
+            if ( isRunning )
+            {
+                sprintTimer += Time.deltaTime;
+            
+              if ( sprintTimer > sprintDuration )
+                {
+                    isRunning = false;
+                    isWalking = true;
+                    if(isWalking){
+                        move = transform.TransformDirection(move) * walkSpeed;
+                    }
+                }
+                else if ( characterController.isGrounded )
+                {
+                    move = transform.TransformDirection(move) * runSpeed;
+                }
+            }
+            else
+            {
+                sprintTimer -= Time.deltaTime * 0.5f;
                 move = transform.TransformDirection(move) * walkSpeed;
+            }
+            
+            sprintTimer = Mathf.Clamp( sprintTimer, 0, sprintDuration );
+            
+
+
+            //move = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+
+            //if(Input.GetKey(KeyCode.LeftShift))
+            //    move = transform.TransformDirection(move) * runSpeed;
+            //else
+            //    move = transform.TransformDirection(move) * walkSpeed;
             
             if (Input.GetKey(KeyCode.Space))
                 move.y = jumpSpeed;
