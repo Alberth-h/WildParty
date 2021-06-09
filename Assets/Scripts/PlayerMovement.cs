@@ -1,39 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviour
 {
     CharacterController characterController;
     [Header("Opciones de Personaje")]
-    public float walkSpeed = 4.0f;
-    public float runSpeed = 12.0f;
-    public float jumpSpeed = 8.0f;
-    public float gravity = 20.0f;
+    [SerializeField]
+    float walkSpeed = 4.0f;
+    float runSpeed = 12.0f;
+    float jumpSpeed = 8.0f;
+    float gravity = 20.0f;
     //float timeRunning = 0.0f;
-    float Loop ;
-    bool isRunning = false;
-    bool isWalking = false;
-    float sprintDuration = 2.0f;
-    private float sprintTimer = 0;
+    private float Loop ;
+    private bool isRunning = false;
+    private bool isWalking = false;
+    private float sprintDuration = 2.0f;
+    private float sprintTimer = 0.0f;
 
     [Header("Opciones de Camara")]
-    public Camera cam;
-    public float mouseHorizontal = 3.0f;
-    public float mouseVertical = 2.0f;
-    public float minRotation = -65.0f;
-    public float maxRotation = 20.0f;
-    float h_mouse , v_mouse;
+    [SerializeField] Camera cam;
+    private float mouseHorizontal = 3.0f;
+    private float mouseVertical = 2.0f;
+    private float minRotation = -65.0f;
+    private float maxRotation = 20.0f;
+    private float h_mouse , v_mouse;
+
+    PhotonView PV;
 
     private Vector3 move = Vector3.zero;
     
+    void Awake()
+    {
+        PV = GetComponent<PhotonView>();
+    }
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        if(!PV.IsMine)
+        {
+            Destroy(GetComponentInChildren<Camera>().gameObject);
+        }
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        if(!PV.IsMine)
+            return;
         h_mouse = mouseHorizontal * Input.GetAxis("Mouse X");
         v_mouse += mouseVertical * Input.GetAxis("Mouse Y");
 
@@ -47,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             move = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
             if ( Input.GetAxis( "Horizontal" ) !=0f || Input.GetAxis( "Vertical" ) != 0f)
                 {
-                    if ( Input.GetKey( "left shift" ) || Input.GetKey( "right shift" ) )
+                    if ( Input.GetKey( "left shift" ) || Input.GetKey( "right shift" ) && sprintTimer < 2 )
                     {
                         // Running
                         isWalking = false;
@@ -71,8 +85,8 @@ public class PlayerMovement : MonoBehaviour
             if ( isRunning )
             {
                 sprintTimer += Time.deltaTime;
-            
-              if ( sprintTimer > sprintDuration )
+
+                if ( sprintTimer > sprintDuration )
                 {
                     isRunning = false;
                     isWalking = true;
@@ -87,20 +101,11 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                sprintTimer -= Time.deltaTime * 0.5f;
+                sprintTimer -= Time.deltaTime * 0.4f;
                 move = transform.TransformDirection(move) * walkSpeed;
             }
-            
+
             sprintTimer = Mathf.Clamp( sprintTimer, 0, sprintDuration );
-            
-
-
-            //move = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
-
-            //if(Input.GetKey(KeyCode.LeftShift))
-            //    move = transform.TransformDirection(move) * runSpeed;
-            //else
-            //    move = transform.TransformDirection(move) * walkSpeed;
             
             if (Input.GetKey(KeyCode.Space))
                 move.y = jumpSpeed;
