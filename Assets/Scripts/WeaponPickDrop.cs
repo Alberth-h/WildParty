@@ -7,8 +7,12 @@ public class WeaponPickDrop : MonoBehaviour
     //[SerializeField] AQUIVALASCRIPTDELARMA armaScript;
     [SerializeField] Rigidbody rb;
     [SerializeField] BoxCollider coll;
+<<<<<<< HEAD
     [SerializeField] Transform player;
     [SerializeField] Transform weaponContainer, cam;
+=======
+    [SerializeField] Transform player, weaponContainer, cam;
+>>>>>>> e2a481b922b7c619a93788a676c5460aef63dd0d
 
     [SerializeField] float pickUpRange;
     [SerializeField] float dropForwardForce, dropUpwardForce;
@@ -45,7 +49,11 @@ public class WeaponPickDrop : MonoBehaviour
             PickUp();
             return;
         }
+<<<<<<< HEAD
         //Drop if equipped and E is pressed
+=======
+        //Drop if equipped and Q is predded
+>>>>>>> e2a481b922b7c619a93788a676c5460aef63dd0d
         if (equipped && Input.GetKeyDown(KeyCode.E))
         {
             Drop();
@@ -75,7 +83,10 @@ public class WeaponPickDrop : MonoBehaviour
 
     private void Drop()
     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> e2a481b922b7c619a93788a676c5460aef63dd0d
         equipped = false;
         slotFull = false;
 

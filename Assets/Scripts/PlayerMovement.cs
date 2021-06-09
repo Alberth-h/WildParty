@@ -7,11 +7,18 @@ public class PlayerMovement : MonoBehaviour
 {
     CharacterController characterController;
     [Header("Opciones de Personaje")]
+<<<<<<< HEAD
     [SerializeField]
     float walkSpeed = 4.0f;
     float runSpeed = 12.0f;
     float jumpSpeed = 8.0f;
     float gravity = 20.0f;
+=======
+    [SerializeField] float walkSpeed = 4.0f;
+    [SerializeField] float runSpeed = 12.0f;
+    [SerializeField] float jumpSpeed = 8.0f;
+    [SerializeField] float gravity = 20.0f;
+>>>>>>> e2a481b922b7c619a93788a676c5460aef63dd0d
     //float timeRunning = 0.0f;
     private float Loop ;
     private bool isRunning = false;
@@ -26,8 +33,11 @@ public class PlayerMovement : MonoBehaviour
     private float minRotation = -65.0f;
     private float maxRotation = 20.0f;
     private float h_mouse , v_mouse;
+<<<<<<< HEAD
 
     PhotonView PV;
+=======
+>>>>>>> e2a481b922b7c619a93788a676c5460aef63dd0d
 
     private Vector3 move = Vector3.zero;
     
@@ -104,6 +114,12 @@ public class PlayerMovement : MonoBehaviour
                 sprintTimer -= Time.deltaTime * 0.4f;
                 move = transform.TransformDirection(move) * walkSpeed;
             }
+<<<<<<< HEAD
+=======
+
+            sprintTimer = Mathf.Clamp( sprintTimer, 0, sprintDuration );
+            
+>>>>>>> e2a481b922b7c619a93788a676c5460aef63dd0d
 
             sprintTimer = Mathf.Clamp( sprintTimer, 0, sprintDuration );
             
