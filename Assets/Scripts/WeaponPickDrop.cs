@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class WeaponPickDrop : MonoBehaviour
 {
+    [Header("Opciones del contedor del arma")]
     //[SerializeField] AQUIVALASCRIPTDELARMA armaScript;
-    [SerializeField] Rigidbody rb;
-    [SerializeField] BoxCollider coll;
-<<<<<<< HEAD
-    [SerializeField] Transform player;
-    [SerializeField] Transform weaponContainer, cam;
-=======
-    [SerializeField] Transform player, weaponContainer, cam;
->>>>>>> e2a481b922b7c619a93788a676c5460aef63dd0d
+    [SerializeField] 
+    Rigidbody rb;
+    BoxCollider coll;
+    Transform player;
+    Transform weaponContainer, cam;
 
-    [SerializeField] float pickUpRange;
-    [SerializeField] float dropForwardForce, dropUpwardForce;
-
-    [SerializeField] bool equipped;
-    [SerializeField] static bool slotFull;
+    [Header("Opciones de las fisicas")]
+    [SerializeField] 
+    float pickUpRange;
+    float dropForwardForce, dropUpwardForce;
+    bool equipped;
+    static bool slotFull;
 
     // Start is called before the first frame update
     private void Start()
@@ -49,11 +48,7 @@ public class WeaponPickDrop : MonoBehaviour
             PickUp();
             return;
         }
-<<<<<<< HEAD
         //Drop if equipped and E is pressed
-=======
-        //Drop if equipped and Q is predded
->>>>>>> e2a481b922b7c619a93788a676c5460aef63dd0d
         if (equipped && Input.GetKeyDown(KeyCode.E))
         {
             Drop();
@@ -83,10 +78,6 @@ public class WeaponPickDrop : MonoBehaviour
 
     private void Drop()
     {
-<<<<<<< HEAD
-
-=======
->>>>>>> e2a481b922b7c619a93788a676c5460aef63dd0d
         equipped = false;
         slotFull = false;
 
