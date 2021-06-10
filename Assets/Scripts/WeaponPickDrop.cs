@@ -6,17 +6,16 @@ public class WeaponPickDrop : MonoBehaviour
 {
     [Header("Opciones del contedor del arma")]
     //[SerializeField] AQUIVALASCRIPTDELARMA armaScript;
-    [SerializeField] 
-    Rigidbody rb;
-    BoxCollider coll;
-    Transform player;
-    Transform weaponContainer, cam;
+     
+    [SerializeField]Rigidbody rb;
+    [SerializeField]BoxCollider coll;
+    [SerializeField]Transform player;
+    [SerializeField]Transform weaponContainer, cam;
 
     [Header("Opciones de las fisicas")]
-    [SerializeField] 
-    float pickUpRange;
-    float dropForwardForce, dropUpwardForce;
-    bool equipped;
+    [SerializeField]float pickUpRange;
+    [SerializeField]float dropForwardForce, dropUpwardForce;
+    [SerializeField]bool equipped;
     static bool slotFull;
 
     // Start is called before the first frame update

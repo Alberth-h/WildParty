@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+using Photon.Realtime;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviourPunCallbacks
 {
     CharacterController characterController;
     [Header("Opciones de Personaje")]
@@ -21,11 +23,17 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Opciones de Camara")]
     [SerializeField] Camera cam;
+    [SerializeField] GameObject cameraHolder;
     private float mouseHorizontal = 3.0f;
     private float mouseVertical = 2.0f;
     private float minRotation = -65.0f;
     private float maxRotation = 20.0f;
     private float h_mouse , v_mouse;
+
+    [SerializeField] Item[] items;
+
+    int itemIndex;
+    int previousItemIndex = -1;
 
     PhotonView PV;
 
@@ -38,7 +46,11 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        if(!PV.IsMine)
+        if(PV.IsMine)
+        {
+            EquipItem(0);
+        }
+        else
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
         }
@@ -49,11 +61,17 @@ public class PlayerMovement : MonoBehaviour
         if(!PV.IsMine)
             return;
         h_mouse = mouseHorizontal * Input.GetAxis("Mouse X");
-        v_mouse += mouseVertical * Input.GetAxis("Mouse Y");
+        //v_mouse += mouseVertical * Input.GetAxis("Mouse Y");
 
-        v_mouse = Mathf.Clamp(v_mouse, minRotation, maxRotation);
-        cam.transform.localEulerAngles = new Vector3(-v_mouse, 0, 0);
+        //v_mouse = Mathf.Clamp(v_mouse, minRotation, maxRotation);
+        //cam.transform.localEulerAngles = new Vector3(-v_mouse, 0, 0);
         transform.Rotate(0, h_mouse, 0);
+
+        v_mouse += Input.GetAxis("Mouse Y") * mouseVertical;
+        v_mouse = Mathf.Clamp(v_mouse, -90f, 90f);
+
+        cameraHolder.transform.localEulerAngles = Vector3.left * v_mouse;
+
         
         if(characterController.isGrounded)
         {
@@ -114,5 +132,63 @@ public class PlayerMovement : MonoBehaviour
         move.y -= gravity * Time.deltaTime;
 
         characterController.Move(move * Time.deltaTime);
+        for(int i = 0; i < items.Length; i++)
+        {
+            if(Input.GetKeyDown((i + 1).ToString()))
+            {
+                EquipItem(i);
+                break;
+            }
+        }
+
+        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
+        {
+            if(itemIndex >= items.Length - 1)
+            {
+                EquipItem(0);
+            }
+            else
+            {
+                EquipItem(itemIndex + 1);
+            }
+        }
+        else if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
+        {
+            if(itemIndex <= 0)
+            {
+                EquipItem(items.Length - 1);
+            }
+            else
+            {
+                EquipItem(itemIndex - 1);
+            }
+        }
+    }
+
+    void EquipItem(int _index){
+        if(_index == previousItemIndex)
+            return;
+        itemIndex = _index;
+        items[itemIndex].itemGameObject.SetActive(true);
+
+        if(previousItemIndex != -1)
+        {
+            items[previousItemIndex].itemGameObject.SetActive(false);
+        }
+        previousItemIndex = itemIndex;
+
+        if(PV.IsMine){
+            Hashtable hash = new Hashtable();
+            hash.Add("itemIndex", itemIndex);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        }
+    }
+
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
+    {
+        if(!PV.IsMine && targetPlayer == PV.Owner)
+        {
+            EquipItem((int)changedProps["itemIndex"]);
+        }
     }
 }
