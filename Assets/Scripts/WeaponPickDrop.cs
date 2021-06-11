@@ -9,6 +9,8 @@ public class WeaponPickDrop : MonoBehaviour
      
     [SerializeField]Rigidbody rb;
     [SerializeField]BoxCollider coll;
+    //[SerializeField]Transform player0;
+    //[SerializeField]Transform player1;
     [SerializeField]Transform player;
     [SerializeField]Transform weaponContainer, cam;
 
@@ -16,7 +18,6 @@ public class WeaponPickDrop : MonoBehaviour
     [SerializeField]float pickUpRange;
     [SerializeField]float dropForwardForce, dropUpwardForce;
     [SerializeField]bool equipped;
-    static bool slotFull;
 
     // Start is called before the first frame update
     private void Start()
@@ -33,7 +34,6 @@ public class WeaponPickDrop : MonoBehaviour
             //armaScript.enabled = true;
             rb.isKinematic = true;
             coll.isTrigger = true;
-            slotFull = true;
         }
     }
 
@@ -42,11 +42,25 @@ public class WeaponPickDrop : MonoBehaviour
     {
         //Check if player is in the range and if E is pressed
         Vector3 distanceToPlayer = player.position - transform.position;
-        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E) && !slotFull)
+        if (!equipped && distanceToPlayer.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E))
         {
             PickUp();
             return;
         }
+
+        //Vector3 distanceToPlayer0 = player0.position - transform.position;
+        //Vector3 distanceToPlayer1 = player1.position - transform.position;
+        //if (!equipped && distanceToPlayer0.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E))
+        //{
+        //    PickUp();
+        //    return;
+        //}
+        //if (!equipped && distanceToPlayer1.magnitude <= pickUpRange && Input.GetKeyDown(KeyCode.E))
+        //{
+        //    PickUp();
+        //    return;
+        //}
+
         //Drop if equipped and E is pressed
         if (equipped && Input.GetKeyDown(KeyCode.E))
         {
@@ -58,7 +72,6 @@ public class WeaponPickDrop : MonoBehaviour
     private void PickUp()
     {
         equipped = true;
-        slotFull = true;
 
         //Make weapon a child of the camera and move it to default position
         transform.SetParent(weaponContainer);
@@ -78,7 +91,6 @@ public class WeaponPickDrop : MonoBehaviour
     private void Drop()
     {
         equipped = false;
-        slotFull = false;
 
         //Set parent to null
         transform.SetParent(null);

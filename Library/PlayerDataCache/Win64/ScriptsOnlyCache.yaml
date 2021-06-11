@@ -1,6 +1,8 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - ChangeName
+    - ChangeNamePlayer
     - GunInfo
     - Item
     - Launcher
@@ -135,6 +137,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4460}
     - Class: 114
       Script: {instanceID: 4484}
+    - Class: 114
+      Script: {instanceID: 30764}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -162,8 +166,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 4
       Script: {instanceID: 0}
-    - Class: 20
-      Script: {instanceID: 0}
     - Class: 21
       Script: {instanceID: 0}
     - Class: 23
@@ -182,8 +184,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
-    - Class: 81
-      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
@@ -201,18 +201,12 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2782}
     - Class: 114
-      Script: {instanceID: 3672}
-    - Class: 114
       Script: {instanceID: 4048}
     - Class: 114
-      Script: {instanceID: 4144}
+      Script: {instanceID: 38892}
     - Class: 114
-      Script: {instanceID: 4484}
+      Script: {instanceID: 38898}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 137
-      Script: {instanceID: 0}
-    - Class: 143
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -321,7 +315,7 @@ ScriptsOnlyBuild:
     className: OnPointerOverTooltip
   - hash:
       serializedVersion: 2
-      Hash: 1dbd6b63cfa5b4d3d02b90fa9d52b77c
+      Hash: dbf3800acdf7fa3383d3658b370b62af
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: WeaponPickDrop
@@ -949,8 +943,20 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMovement
+  - hash:
+      serializedVersion: 2
+      Hash: 4b048a8e083f8fb3221aa1c7935e7220
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChangeName
+  - hash:
+      serializedVersion: 2
+      Hash: 1966e03a5f3bcef8e22b833d6bb59416
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChangeNamePlayer
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/SampleScene 1.unity
-  playerPath: C:/Users/ruben/Documents/WildPartyBuilds/WildParty.exe
+  playerPath: D:/WildParty/builds/WildParty.exe
