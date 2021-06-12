@@ -4,8 +4,9 @@ using UnityEngine;
 using Photon.Pun;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Photon.Realtime;
+using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviourPunCallbacks
+public class PlayerMovement : MonoBehaviourPunCallbacks, IDamageable
 {
     CharacterController characterController;
     [Header("Opciones de Personaje")]
@@ -26,23 +27,34 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
     [SerializeField] GameObject cameraHolder;
     private float mouseHorizontal = 3.0f;
     private float mouseVertical = 2.0f;
-    private float minRotation = -65.0f;
-    private float maxRotation = 20.0f;
+    //private float minRotation = -65.0f;
+    //private float maxRotation = 20.0f;
     private float h_mouse , v_mouse;
 
     [SerializeField] Item[] items;
+
+    [SerializeField] Image healthbarImage; //Healthbar
+    [SerializeField] GameObject ui;
 
     int itemIndex;
     int previousItemIndex = -1;
 
     PhotonView PV;
 
+    const float maxHealth = 100f;
+    float currentHealth = maxHealth;
+
+    PlayerManager playerManager;
+
     private Vector3 move = Vector3.zero;
     
     void Awake()
     {
         PV = GetComponent<PhotonView>();
+
+        playerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<PlayerManager>();
     }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -53,6 +65,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         else
         {
             Destroy(GetComponentInChildren<Camera>().gameObject);
+            Destroy(ui);
         }
     }
 
@@ -141,7 +154,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             }
         }
 
-        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f)
+        if(Input.GetAxisRaw("Mouse ScrollWheel") > 0f) //Change gun
         {
             if(itemIndex >= items.Length - 1)
             {
@@ -152,7 +165,7 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
                 EquipItem(itemIndex + 1);
             }
         }
-        else if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f)
+        else if(Input.GetAxisRaw("Mouse ScrollWheel") < 0f) //Change gun
         {
             if(itemIndex <= 0)
             {
@@ -162,6 +175,18 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
             {
                 EquipItem(itemIndex - 1);
             }
+        }
+
+        if(Input.GetMouseButtonDown(0)) //Use gun/item
+        {
+            items[itemIndex].Use();
+        }
+
+        if(transform.position.y < -10f) //Die if you fall
+        {
+            Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
+            this.transform.position = spawnpoint.position;
+            this.transform.rotation = spawnpoint.rotation;
         }
     }
 
@@ -190,5 +215,35 @@ public class PlayerMovement : MonoBehaviourPunCallbacks
         {
             EquipItem((int)changedProps["itemIndex"]);
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        PV.RPC("RPC_TakeDamage", RpcTarget.All, damage);
+    }
+
+    [PunRPC]
+    void RPC_TakeDamage(float damage)
+    {
+        if(!PV.IsMine)
+            return;
+
+        currentHealth -= damage;
+
+        healthbarImage.fillAmount = currentHealth / maxHealth;
+
+        if(currentHealth <= 0)
+        {
+            healthbarImage.fillAmount = 1;
+            currentHealth = maxHealth;
+            Transform spawnpoint = SpawnManager.Instance.GetSpawnpoint();
+            this.transform.position = spawnpoint.position;
+            this.transform.rotation = spawnpoint.rotation;
+        }
+    }
+
+    void Die()
+    {
+        playerManager.Die();
     }
 }

@@ -2,9 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - ChangeName
-    - ChangeNamePlayer
     - GunInfo
-    - Item
     - Launcher
     - Menu
     - MenuManager
@@ -13,6 +11,9 @@ ScriptsOnlyBuild:
     - PlayerMovement
     - RoomListItem
     - RoomManager
+    - SingleShotGun
+    - SpawnManager
+    - Spawnpoint
     - WeaponPickDrop
     PhotonUnityNetworking.Editor.dll:
     - Photon.Pun.PunSceneSettings
@@ -20,6 +21,15 @@ ScriptsOnlyBuild:
     - Photon.Pun.PhotonTransformView
     - Photon.Pun.PhotonView
     - Photon.Pun.ServerSettings
+    Unity.Postprocessing.Runtime.dll:
+    - UnityEngine.Rendering.PostProcessing.AmbientOcclusion
+    - UnityEngine.Rendering.PostProcessing.Bloom
+    - UnityEngine.Rendering.PostProcessing.ChromaticAberration
+    - UnityEngine.Rendering.PostProcessing.PostProcessLayer
+    - UnityEngine.Rendering.PostProcessing.PostProcessProfile
+    - UnityEngine.Rendering.PostProcessing.PostProcessResources
+    - UnityEngine.Rendering.PostProcessing.PostProcessVolume
+    - UnityEngine.Rendering.PostProcessing.Vignette
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -71,6 +81,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 72
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 89
@@ -80,65 +92,69 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1492}
+      Script: {instanceID: 1532}
     - Class: 114
-      Script: {instanceID: 1522}
+      Script: {instanceID: 1534}
     - Class: 114
-      Script: {instanceID: 1546}
+      Script: {instanceID: 1550}
     - Class: 114
-      Script: {instanceID: 1632}
+      Script: {instanceID: 1604}
     - Class: 114
-      Script: {instanceID: 1750}
+      Script: {instanceID: 1694}
     - Class: 114
-      Script: {instanceID: 1798}
+      Script: {instanceID: 1824}
     - Class: 114
-      Script: {instanceID: 2012}
+      Script: {instanceID: 1878}
     - Class: 114
-      Script: {instanceID: 2320}
+      Script: {instanceID: 2110}
     - Class: 114
-      Script: {instanceID: 2352}
+      Script: {instanceID: 2328}
     - Class: 114
-      Script: {instanceID: 2428}
+      Script: {instanceID: 2460}
     - Class: 114
-      Script: {instanceID: 2470}
+      Script: {instanceID: 2494}
     - Class: 114
-      Script: {instanceID: 2526}
+      Script: {instanceID: 2574}
     - Class: 114
-      Script: {instanceID: 2584}
+      Script: {instanceID: 2618}
+    - Class: 114
+      Script: {instanceID: 2654}
+    - Class: 114
+      Script: {instanceID: 2682}
     - Class: 114
       Script: {instanceID: 2772}
     - Class: 114
-      Script: {instanceID: 2776}
+      Script: {instanceID: 2944}
     - Class: 114
-      Script: {instanceID: 2782}
+      Script: {instanceID: 2948}
     - Class: 114
-      Script: {instanceID: 2858}
+      Script: {instanceID: 2954}
     - Class: 114
-      Script: {instanceID: 3116}
+      Script: {instanceID: 3044}
     - Class: 114
-      Script: {instanceID: 3510}
+      Script: {instanceID: 3316}
     - Class: 114
-      Script: {instanceID: 3672}
+      Script: {instanceID: 3750}
     - Class: 114
-      Script: {instanceID: 3776}
+      Script: {instanceID: 3928}
     - Class: 114
-      Script: {instanceID: 3792}
+      Script: {instanceID: 4038}
     - Class: 114
-      Script: {instanceID: 4048}
+      Script: {instanceID: 4054}
     - Class: 114
-      Script: {instanceID: 4050}
+      Script: {instanceID: 4332}
     - Class: 114
-      Script: {instanceID: 4144}
+      Script: {instanceID: 4334}
     - Class: 114
-      Script: {instanceID: 4178}
+      Script: {instanceID: 4476}
     - Class: 114
-      Script: {instanceID: 4412}
+      Script: {instanceID: 4730}
     - Class: 114
-      Script: {instanceID: 4460}
+      Script: {instanceID: 4752}
     - Class: 114
-      Script: {instanceID: 4484}
+      Script: {instanceID: 4780}
     - Class: 114
-      Script: {instanceID: 30764}
+      Script: {instanceID: 4808}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -178,34 +194,42 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
-    - Class: 54
-      Script: {instanceID: 0}
     - Class: 64
       Script: {instanceID: 0}
     - Class: 65
+      Script: {instanceID: 0}
+    - Class: 89
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1798}
+      Script: {instanceID: 1534}
     - Class: 114
-      Script: {instanceID: 2320}
+      Script: {instanceID: 1844}
     - Class: 114
-      Script: {instanceID: 2428}
+      Script: {instanceID: 2104}
     - Class: 114
-      Script: {instanceID: 2584}
+      Script: {instanceID: 2460}
+    - Class: 114
+      Script: {instanceID: 2574}
+    - Class: 114
+      Script: {instanceID: 2728}
     - Class: 114
       Script: {instanceID: 2772}
     - Class: 114
-      Script: {instanceID: 2782}
+      Script: {instanceID: 2954}
     - Class: 114
-      Script: {instanceID: 4048}
+      Script: {instanceID: 3444}
     - Class: 114
-      Script: {instanceID: 38892}
+      Script: {instanceID: 3590}
     - Class: 114
-      Script: {instanceID: 38898}
+      Script: {instanceID: 3912}
+    - Class: 114
+      Script: {instanceID: 4598}
+    - Class: 114
+      Script: {instanceID: 4790}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -217,6 +241,18 @@ ScriptsOnlyBuild:
     - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
+  - hash:
+      serializedVersion: 2
+      Hash: a6e561615949734e9f12f9b61661f43e
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Image
+  - hash:
+      serializedVersion: 2
+      Hash: ae83e830e7a90c0aff918c4c2e520825
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: GraphicRaycaster
   - hash:
       serializedVersion: 2
       Hash: 24f79094aff162c9aa69c31d64d777d3
@@ -235,12 +271,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
-  - hash:
-      serializedVersion: 2
-      Hash: a6e561615949734e9f12f9b61661f43e
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Image
   - hash:
       serializedVersion: 2
       Hash: ab039a385ef4459756519a3fe91dccc6
@@ -273,6 +303,12 @@ ScriptsOnlyBuild:
     className: LayoutElement
   - hash:
       serializedVersion: 2
+      Hash: d0987ce3e9092dbe0fa30d73f333fffa
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: Grain
+  - hash:
+      serializedVersion: 2
       Hash: 6bc76e17f0d5e93f3eea7f5a2fe227f3
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -303,6 +339,12 @@ ScriptsOnlyBuild:
     className: TMP_FontAsset
   - hash:
       serializedVersion: 2
+      Hash: e82c0521cdfe8cb6a168ef7208a98d4a
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: Vignette
+  - hash:
+      serializedVersion: 2
       Hash: 3f600ad0f750f59238a91f7513b927c1
     assemblyName: PhotonUnityNetworking.dll
     namespaceName: Photon.Pun
@@ -315,16 +357,28 @@ ScriptsOnlyBuild:
     className: OnPointerOverTooltip
   - hash:
       serializedVersion: 2
-      Hash: dbf3800acdf7fa3383d3658b370b62af
+      Hash: 1dbd6b63cfa5b4d3d02b90fa9d52b77c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: WeaponPickDrop
+  - hash:
+      serializedVersion: 2
+      Hash: f542c1afca5bb4022f91fdda19b8d622
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: DepthOfField
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: GroupTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 2111677372bc2503de47c80ee65b74c1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChangeName
   - hash:
       serializedVersion: 2
       Hash: 800c50acba124432abb4cf0d47202e06
@@ -355,6 +409,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RawImage
+  - hash:
+      serializedVersion: 2
+      Hash: a1f19ad47d3094e235f21b74dfc423a8
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: PostProcessLayer
   - hash:
       serializedVersion: 2
       Hash: 87207d40b89ca632396b05b3cb1e69b0
@@ -447,6 +507,12 @@ ScriptsOnlyBuild:
     className: PhotonRigidbody2DView
   - hash:
       serializedVersion: 2
+      Hash: bcc5d10f40b57cfc98b9f90369ad7056
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SingleShotGun
+  - hash:
+      serializedVersion: 2
       Hash: e0766a0e8938b34dbdc572ce4b274d5c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -459,16 +525,22 @@ ScriptsOnlyBuild:
     className: OnEscapeQuit
   - hash:
       serializedVersion: 2
+      Hash: 61b9d9b6f4b6a222dfea8b131b3d3227
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: ChromaticAberration
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestRunner.Utils
     className: TestRunCallbackListener
   - hash:
       serializedVersion: 2
-      Hash: ae83e830e7a90c0aff918c4c2e520825
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: GraphicRaycaster
+      Hash: eb02feb4286a5806bb13b9d45da43c95
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Spawnpoint
   - hash:
       serializedVersion: 2
       Hash: f40fedccd4adbc76605bea6d67537e4b
@@ -573,6 +645,12 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
+      Hash: a53651ee3996fbba20dfe0fce02f0b23
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: AutoExposure
+  - hash:
+      serializedVersion: 2
       Hash: 8aa3d6ccbcb54ee8db6c1229854adaaa
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -645,6 +723,12 @@ ScriptsOnlyBuild:
     className: PlayModeRunnerCallback
   - hash:
       serializedVersion: 2
+      Hash: 71f7f12b8d0f4fd73590db8bcb6d453c
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: Bloom
+  - hash:
+      serializedVersion: 2
       Hash: bd3cf68c8964d3c66d1c43f4f98508c9
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -679,6 +763,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: TextToggleIsOnTransition
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SpawnManager
   - hash:
       serializedVersion: 2
       Hash: a81d4c2c1cf3ad164d277d927a193679
@@ -723,6 +813,12 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
+      Hash: 7e6ed836cbaa230e56d6a2bbae1b9bb5
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: PostProcessEffectSettings
+  - hash:
+      serializedVersion: 2
       Hash: 4fe8955e1c662935371b0936cafbb89b
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
@@ -753,6 +849,12 @@ ScriptsOnlyBuild:
     className: ButtonInsideScrollList
   - hash:
       serializedVersion: 2
+      Hash: 38bcb4d3f9a1812fd650f92e87a4cf64
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: PostProcessProfile
+  - hash:
+      serializedVersion: 2
       Hash: ed73a38a6df650fdeeacac5cdb11df48
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
@@ -765,10 +867,16 @@ ScriptsOnlyBuild:
     className: StatesGui
   - hash:
       serializedVersion: 2
-      Hash: 1a286079cf1647bc90669bb8cf035be6
+      Hash: 97ef6bf4e3bc4048120649a444e03eb5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GunInfo
+  - hash:
+      serializedVersion: 2
+      Hash: 50c443b12ccc0b475183318b5088bcc5
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: PostProcessDebug
   - hash:
       serializedVersion: 2
       Hash: 3165968ba45c74472d279ba04455fccb
@@ -855,6 +963,24 @@ ScriptsOnlyBuild:
     className: EventSystemSpawner
   - hash:
       serializedVersion: 2
+      Hash: 726fcf7961cbb4108aa5be5e55b8c8bf
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: ColorGrading
+  - hash:
+      serializedVersion: 2
+      Hash: af93f9c42e90877a9ba31e37adfd900c
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: MotionBlur
+  - hash:
+      serializedVersion: 2
+      Hash: b13de7a0a457cb8e026d4237dc1b5797
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: LensDistortion
+  - hash:
+      serializedVersion: 2
       Hash: adb92691ab0496634b4241d3545a0010
     assemblyName: PhotonUnityNetworking.dll
     namespaceName: Photon.Pun
@@ -873,10 +999,10 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 07eb88ee94ce3ac5d48345fb3d2c8d66
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Item
+      Hash: 63d7b9b64a11859f416d72ba9a3c3fec
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: ScreenSpaceReflections
   - hash:
       serializedVersion: 2
       Hash: 23d98efc145b1081fdecd8f309db521f
@@ -889,6 +1015,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: PunTurnManager
+  - hash:
+      serializedVersion: 2
+      Hash: d5630f96bd5a6a6eed7e1754c3fb8703
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: PostProcessVolume
   - hash:
       serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
@@ -927,6 +1059,12 @@ ScriptsOnlyBuild:
     className: Launcher
   - hash:
       serializedVersion: 2
+      Hash: d6fc8d3165070298511ec776ea575626
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: PostProcessResources
+  - hash:
+      serializedVersion: 2
       Hash: 00c99ff3f40bd11590c670580e513825
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
@@ -939,24 +1077,18 @@ ScriptsOnlyBuild:
     className: RoomListItem
   - hash:
       serializedVersion: 2
-      Hash: 2d522422dda75b05eea0d6cabd6f4f7a
+      Hash: ac6acd886c54c48c599ab5fed5781ea7
+    assemblyName: Unity.Postprocessing.Runtime.dll
+    namespaceName: UnityEngine.Rendering.PostProcessing
+    className: AmbientOcclusion
+  - hash:
+      serializedVersion: 2
+      Hash: 5231142bda61ced9c4dcac2a65506382
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMovement
-  - hash:
-      serializedVersion: 2
-      Hash: 4b048a8e083f8fb3221aa1c7935e7220
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ChangeName
-  - hash:
-      serializedVersion: 2
-      Hash: 1966e03a5f3bcef8e22b833d6bb59416
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ChangeNamePlayer
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/SampleScene 1.unity
-  playerPath: D:/WildParty/builds/WildParty.exe
+  playerPath: C:/Users/ruben/Documents/WildPartyBuilds/WildParty.exe
